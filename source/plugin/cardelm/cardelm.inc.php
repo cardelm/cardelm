@@ -25,12 +25,12 @@ if (!file_exists($templatefile)){
 	file_put_contents($templatefile,"<!--{template common/header}-->\n<div id=\"wp\" class=\"wp\">\n\t<div id=\"pt\" class=\"bm cl\">\n\t\t<div class=\"z\"><a href=\"./\" class=\"nvhm\" title=\"{lang home}\">\$_G[setting][bbname]</a><em>&raquo;</em>{\$currentnav}</div>\n\t</div>\n</div>\n<div class=\"wp\">\n\n</div>\n<!--{subtemplate common/footer}-->");
 }
 
-
 //$mod_file = DISCUZ_ROOT.'source/plugin/cardelm/source/'.$thismokuai.'/main/'.$submod.'.inc.php';
 $mod_file = 'C:\GitHub\cardelm\source/plugin/cardelm/source/'.$thismokuai.'/main/'.$submod.'.inc.php';
 if (!file_exists($mod_file)){
 	file_put_contents($mod_file, "<?php\n\n/**\n*\t一起学吧平台程序\n*\t文件名：".$submod.".inc.php  创建时间：".dgmdate(time(),'dt')."  杨文\n*\n*/\n\nif(!defined('IN_DISCUZ')) {\n\texit('Access Denied');\n}\ninclude template('cardelm:'.\$template_file);\n?>");
-}
+} 
+
 
 
 require_once $mod_file;

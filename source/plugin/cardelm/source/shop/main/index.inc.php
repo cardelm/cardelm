@@ -11,7 +11,5 @@ if(!defined('IN_DISCUZ')) {
 }
 
 
-
-
 include template('cardelm:'.$template_file);
 ?>

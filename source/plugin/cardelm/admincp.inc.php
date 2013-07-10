@@ -33,7 +33,7 @@ function check_dz_update($path=''){
 					check_dz_update($path."/".$file);
 				}else{
 					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHub文件修改时间大于wamp时
-						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : iconv("UTF-8", "ASCII",file_get_contents($path."/".$file)));
+						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
 					}
 				}
 			}
@@ -59,7 +59,7 @@ function check_homedz_update($path=''){
 					check_homedz_update($path."/".$file);
 				}else{
 					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHub文件修改时间大于wamp时
-						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : iconv("UTF-8", "ASCII",file_get_contents($path."/".$file)));
+						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
 					}
 				}
 			}
@@ -67,12 +67,6 @@ function check_homedz_update($path=''){
 	}
 }//func end
 /////////以上部分在正式的文件中，必须删除，仅在进行GitHub调试时使用///////////////
-
-
-
-
-
-
 
 
 
