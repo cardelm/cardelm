@@ -16,6 +16,8 @@ class plugin_cardelm {
 		if ($this_dir == 'C:\wamp\www\discuzdemo\dz3utf8\source\plugin\cardelm'){
 			$source_dir = 'C:\GitHub\cardelm';
 			$this -> check_dz_update();
+		}elseif($this_dir == 'D:\web\wamp\www\demo\dz3utf8\source\plugin\cardelm'){
+			$this -> check_homedz_update();
 		}
 
 	}
@@ -37,6 +39,31 @@ class plugin_cardelm {
 							dmkdir($out_path."/".$file);
 						}
 						$this -> check_dz_update($path."/".$file);
+					}else{
+						if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHub文件修改时间大于wamp时
+							file_put_contents ($out_path."/".$file,file_get_contents($path."/".$file));
+						}
+					}
+				}
+			}
+		}
+	}//func end
+	function check_homedz_update($path=''){
+		clearstatcache();
+		if($path=='')
+			$path = 'C:\GitHub\cardelm';//本地的GitHub的discuz文件夹
+
+		$out_path = 'D:\web\wamp\www\demo\dz3utf8'.str_replace("C:\GitHub\cardelm","",$path);//本地的wamp的discuz文件夹
+
+		if ($handle = opendir($path)) {
+			while (false !== ($file = readdir($handle))) {
+
+				if ($file != "." && $file != "..") {
+					if (is_dir($path."/".$file)) {
+						if (!is_dir($out_path."/".$file)){
+							dmkdir($out_path."/".$file);
+						}
+						$this -> check_homedz_update($path."/".$file);
 					}else{
 						if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHub文件修改时间大于wamp时
 							file_put_contents ($out_path."/".$file,file_get_contents($path."/".$file));
