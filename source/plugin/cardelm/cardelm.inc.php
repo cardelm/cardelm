@@ -29,14 +29,14 @@ if (!file_exists($templatefile)){
 //$mod_file = DISCUZ_ROOT.'source/plugin/cardelm/source/'.$thismokuai.'/main/'.$submod.'.inc.php';
 $mod_file = 'C:\GitHub\cardelm\source/plugin/cardelm/source/'.$thismokuai.'/main/'.$submod.'.inc.php';
 if (!file_exists($mod_file)){
-	file_put_contents($mod_file, "<?php\n\n/**\n*\tÒ»ÆğÑ§°ÉÆ½Ì¨³ÌĞò\n*\tÎÄ¼şÃû£º".$submod.".inc.php  ´´½¨Ê±¼ä£º".dgmdate(time(),'dt')."  ÑîÎÄ\n*\n*/\n\nif(!defined('IN_DISCUZ')) {\n\texit('Access Denied');\n}\ninclude template('cardelm:'.\$template_file);\n?>");
+	file_put_contents($mod_file, "<?php\n\n/**\n*\tä¸€èµ·å­¦å§å¹³å°ç¨‹åº\n*\tæ–‡ä»¶åï¼š".$submod.".inc.php  åˆ›å»ºæ—¶é—´ï¼š".dgmdate(time(),'dt')."  æ¨æ–‡\n*\n*/\n\nif(!defined('IN_DISCUZ')) {\n\texit('Access Denied');\n}\ninclude template('cardelm:'.\$template_file);\n?>");
 }
 
 
 require_once $mod_file;
 
 
-// ä¯ÀÀÆ÷ÓÑºÃµÄ±äÁ¿Êä³ö
+// æµè§ˆå™¨å‹å¥½çš„å˜é‡è¾“å‡º
 function dump($var, $echo=true,$label=null, $strict=true){
     $label = ($label===null) ? '' : rtrim($label) . ' ';
     if(!$strict) {

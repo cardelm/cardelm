@@ -4,8 +4,8 @@
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
-//ÕâÊÇÎªÁË¶Å¾ø²»Ğ¡ĞÄ¸²¸ÇÎÄ¼ş¶ø×¨ÃÅÓÃÓÚgithubÍ¬²½µÄ³ÌĞò
-//Êµ¼Ê²Ù×÷¹ı³ÌÖĞ£¬ÒòÎªgithubµÄproÖĞµÄÎÄ¼ş¼ĞÓë±¾µØµÄwordpress¡¢discuzÎÄ¼ş¼ĞÃû³ÆÏàÍ¬£¬ÓĞ¼¸´Î½«ÎÄ¼ş¸²¸Ç´í£¬¹ÊÒÔÏÂ´úÂëÎªÅäºÏgithub×¨ÓÃ£¬Ä¿µÄ¾ÍÊÇĞŞ¸ÄgithubÖĞµÄ´úÂë£¬Í¬Ê±×Ô¶¯¸üĞÂ±¾µØµÄ´úÂë£¬´ïµ½µ÷ÊÔµÄ×÷ÓÃ
+//è¿™æ˜¯ä¸ºäº†æœç»ä¸å°å¿ƒè¦†ç›–æ–‡ä»¶è€Œä¸“é—¨ç”¨äºgithubåŒæ­¥çš„ç¨‹åº
+//å®é™…æ“ä½œè¿‡ç¨‹ä¸­ï¼Œå› ä¸ºgithubçš„proä¸­çš„æ–‡ä»¶å¤¹ä¸æœ¬åœ°çš„wordpressã€discuzæ–‡ä»¶å¤¹åç§°ç›¸åŒï¼Œæœ‰å‡ æ¬¡å°†æ–‡ä»¶è¦†ç›–é”™ï¼Œæ•…ä»¥ä¸‹ä»£ç ä¸ºé…åˆgithubä¸“ç”¨ï¼Œç›®çš„å°±æ˜¯ä¿®æ”¹githubä¸­çš„ä»£ç ï¼ŒåŒæ—¶è‡ªåŠ¨æ›´æ–°æœ¬åœ°çš„ä»£ç ï¼Œè¾¾åˆ°è°ƒè¯•çš„ä½œç”¨
 $this_dir = dirname(__FILE__);
 //var_dump($this_dir);
 if ($this_dir == 'C:\wamp\www\discuzdemo\dz3utf8\source\plugin\cardelm'){
@@ -14,13 +14,13 @@ if ($this_dir == 'C:\wamp\www\discuzdemo\dz3utf8\source\plugin\cardelm'){
 }elseif($this_dir == 'D:\web\wamp\www\demo\dz3utf8\source\plugin\cardelm'){
 	check_homedz_update();
 }
-//²ÉÓÃµİ¹é·½Ê½£¬×Ô¶¯¸üĞÂdiscuzÎÄ¼ş
+//é‡‡ç”¨é€’å½’æ–¹å¼ï¼Œè‡ªåŠ¨æ›´æ–°discuzæ–‡ä»¶
 function check_dz_update($path=''){
 	clearstatcache();
 	if($path=='')
-		$path = 'C:\GitHub\cardelm';//±¾µØµÄGitHubµÄdiscuzÎÄ¼ş¼Ğ
+		$path = 'C:\GitHub\cardelm';//æœ¬åœ°çš„GitHubçš„discuzæ–‡ä»¶å¤¹
 
-	$out_path = 'C:\wamp\www\discuzdemo\dz3utf8'.str_replace("C:\GitHub\cardelm","",$path);//±¾µØµÄwampµÄdiscuzÎÄ¼ş¼Ğ
+	$out_path = 'C:\wamp\www\discuzdemo\dz3utf8'.str_replace("C:\GitHub\cardelm","",$path);//æœ¬åœ°çš„wampçš„discuzæ–‡ä»¶å¤¹
 
 	if ($handle = opendir($path)) {
 		while (false !== ($file = readdir($handle))) {
@@ -32,21 +32,21 @@ function check_dz_update($path=''){
 					}
 					check_dz_update($path."/".$file);
 				}else{
-					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHubÎÄ¼şĞŞ¸ÄÊ±¼ä´óÓÚwampÊ±
-						file_put_contents ($out_path."/".$file,file_get_contents($path."/".$file));
+					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHubæ–‡ä»¶ä¿®æ”¹æ—¶é—´å¤§äºwampæ—¶
+						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : iconv("UTF-8", "ASCII",file_get_contents($path."/".$file)));
 					}
 				}
 			}
 		}
 	}
 }//func end
-//²ÉÓÃµİ¹é·½Ê½£¬×Ô¶¯¸üĞÂdiscuzÎÄ¼ş
+//é‡‡ç”¨é€’å½’æ–¹å¼ï¼Œè‡ªåŠ¨æ›´æ–°discuzæ–‡ä»¶
 function check_homedz_update($path=''){
 	clearstatcache();
 	if($path=='')
-		$path = 'C:\GitHub\cardelm';//±¾µØµÄGitHubµÄdiscuzÎÄ¼ş¼Ğ
+		$path = 'C:\GitHub\cardelm';//æœ¬åœ°çš„GitHubçš„discuzæ–‡ä»¶å¤¹
 
-	$out_path = 'D:\web\wamp\www\demo\dz3utf8'.str_replace("C:\GitHub\cardelm","",$path);//±¾µØµÄwampµÄdiscuzÎÄ¼ş¼Ğ
+	$out_path = 'D:\web\wamp\www\demo\dz3utf8'.str_replace("C:\GitHub\cardelm","",$path);//æœ¬åœ°çš„wampçš„discuzæ–‡ä»¶å¤¹
 
 	if ($handle = opendir($path)) {
 		while (false !== ($file = readdir($handle))) {
@@ -58,15 +58,15 @@ function check_homedz_update($path=''){
 					}
 					check_homedz_update($path."/".$file);
 				}else{
-					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHubÎÄ¼şĞŞ¸ÄÊ±¼ä´óÓÚwampÊ±
-						file_put_contents ($out_path."/".$file,file_get_contents($path."/".$file));
+					if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){//GitHubæ–‡ä»¶ä¿®æ”¹æ—¶é—´å¤§äºwampæ—¶
+						file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : iconv("UTF-8", "ASCII",file_get_contents($path."/".$file)));
 					}
 				}
 			}
 		}
 	}
 }//func end
-/////////ÒÔÉÏ²¿·ÖÔÚÕıÊ½µÄÎÄ¼şÖĞ£¬±ØĞëÉ¾³ı£¬½öÔÚ½øĞĞGitHubµ÷ÊÔÊ±Ê¹ÓÃ///////////////
+/////////ä»¥ä¸Šéƒ¨åˆ†åœ¨æ­£å¼çš„æ–‡ä»¶ä¸­ï¼Œå¿…é¡»åˆ é™¤ï¼Œä»…åœ¨è¿›è¡ŒGitHubè°ƒè¯•æ—¶ä½¿ç”¨///////////////
 
 
 
@@ -76,7 +76,7 @@ function check_homedz_update($path=''){
 
 
 
-// ä¯ÀÀÆ÷ÓÑºÃµÄ±äÁ¿Êä³ö
+// æµè§ˆå™¨å‹å¥½çš„å˜é‡è¾“å‡º
 function dump($var, $echo=true,$label=null, $strict=true){
     $label = ($label===null) ? '' : rtrim($label) . ' ';
     if(!$strict) {
