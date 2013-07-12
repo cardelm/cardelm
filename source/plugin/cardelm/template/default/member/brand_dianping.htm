@@ -1,0 +1,24 @@
+<div class="bmw mtw">
+	<div class="hm bm_h"><h2 class="mbm xs2">点评管理</h2></div>
+	<div class="bm_c">{$_G['username']}，你好，{$msg_text}</div>
+	<div class="exfm" style="margin-top: 0;">
+	
+	</div>
+	<table summary="点评管理" cellspacing="0" cellpadding="0" class="dt bm mtm">
+		<caption><h2 class="mbm xs2"><a href="{$this_page}&type=editshop" class="xi2 xs1 xw0 y">添加点评&raquo;</a>点评列表</h2></caption>
+		<tr>
+			<th width="140" class="hm">点评</th>
+
+		</tr>
+		<!--{if $dianpingnum}-->
+			<!--{loop $dianping_list $dianpinglist}-->
+				<tr>
+			<td class="hm">{$dianpinglist[dianpingname]}</td>
+
+		</tr>
+		<!--{/loop}-->
+		<!--{else}-->
+			<tr><td colspan="4"><p class="emp">目前没有任何点评</p></td></tr>
+	<!--{/if}-->
+</table>
+</div>

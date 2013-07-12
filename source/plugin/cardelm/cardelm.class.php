@@ -4,7 +4,7 @@
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
-require_once DISCUZ_ROOT.'source/plugin/cardelm/lang.php';
+
 
 class plugin_cardelm {
 
@@ -38,7 +38,7 @@ class plugin_cardelm {
 						$this -> check_dz_update($path."/".$file);
 					}else{
 						if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){
-							file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
+							file_put_contents ($out_path."/".$file,$file =='cardelm.lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
 						}
 					}
 				}
@@ -63,7 +63,7 @@ class plugin_cardelm {
 						$this -> check_homedz_update($path."/".$file);
 					}else{
 						if (filemtime($path."/".$file)  > filemtime($out_path."/".$file)){
-							file_put_contents ($out_path."/".$file,$file =='lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
+							file_put_contents ($out_path."/".$file,$file =='cardelm.lang.php' ? file_get_contents($path."/".$file) : diconv(file_get_contents($path."/".$file),"UTF-8", "GBK//IGNORE"));
 						}
 					}
 				}
@@ -73,8 +73,8 @@ class plugin_cardelm {
 	////////////////////////
 
 	function global_usernav_extra1(){
-		global $_G,$cardelmlang;
-		$return = '<span class="pipe">|</span><a href="plugin.php?id=cardelm:member">'.$cardelmlang['membercenter'].'</a> ';
+		global $_G;
+		$return = '<span class="pipe">|</span><a href="plugin.php?id=cardelm:member">'.lang('plugin/cardelm','member_center').'</a> ';
 		return $return;
 	}
 

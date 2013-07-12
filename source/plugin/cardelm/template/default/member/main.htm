@@ -1,0 +1,44 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="data/cache/style_1_home_spacecp.css?{VERHASH}" />
+<div id="pt" class="bm cl">
+	<div class="z"><a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+		<a href="plugin.php?id=cardelm:member">{$navtitle}</a> 
+	</div>
+</div>
+<div id="ct" class="ct2_a wp cl">
+	<div class="mn">
+		<div class="bm bw0 mdcp">
+		<!--{if $subnavs}-->
+		<ul class="tb cl">
+		<!--{loop $subnavs $subnav}-->
+			<li{if $subnav[navname] == $subman} class="a"{/if}><a href="plugin.php?id=cardelm:member&man={$man}&subman={$subnav[navname]}" hidefocus="true">{$subnav[navtitle]}</a></li>
+		<!--{/loop}-->
+		</ul>
+		<!--{/if}-->
+		<!--{if $script == 'noperm'}-->
+			<div class="bm bw0">
+				<h1 class="mt">您没有权限</h1>
+				<p>权限不够</p>
+				<p class="notice">mod_notice</p>
+			</div>
+		<!--{elseif !empty($subtpl)}-->
+			
+			<!--{eval include(template($subtpl));}-->
+			
+		<!--{/if}-->
+		</div>
+	</div>
+	<div class="appl">
+		<div class="tbn">
+			<h2 class="mt bbda">{$navtitle}</h2>
+			<ul>
+				<!--{loop $navs $nav}-->
+					<li{if $nav[navname] == $man} class="a"{/if}><a href="plugin.php?id=cardelm:member&man={$nav[navname]}">{$nav[navtitle]}</a></li>
+				<!--{/loop}-->
+				<li><a href="plugin.php?id=cardelm:member&man=logout">{lang logout}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="pbw"></div>
+<!--{subtemplate common/footer}-->

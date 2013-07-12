@@ -4,7 +4,6 @@
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
-require_once DISCUZ_ROOT.'source/plugin/cardelm/lang.php';
 $_G['disabledwidthauto'] = 0;
 
 $submod = getgpc('submod');
@@ -15,7 +14,7 @@ $thistemplate = 'default';
 //$thistemplate = 'modoer';
 $thismokuai = 'shop';
 
-$currentnav = '<a href="plugin.php?id=cardelm">'.$cardelmlang['plugintitle'].'</a>';
+$currentnav = '<a href="plugin.php?id=cardelm">'.lang('plugin/cardelm','plugintitle').'</a>';
 
 
 $template_file = $thistemplate.'/'.$thismokuai.'/'.$submod ;
@@ -29,7 +28,7 @@ if (!file_exists($templatefile)){
 $mod_file = 'C:\GitHub\cardelm\source/plugin/cardelm/source/'.$thismokuai.'/main/'.$submod.'.inc.php';
 if (!file_exists($mod_file)){
 	file_put_contents($mod_file, "<?php\n\n/**\n*\t卡益联盟程序\n*\t文件名：".$submod.".inc.php  创建时间：".dgmdate(time(),'dt')."  杨文\n*\n*/\n\nif(!defined('IN_DISCUZ')) {\n\texit('Access Denied');\n}\ninclude template('cardelm:'.\$template_file);\n?>");
-} 
+}
 
 
 
