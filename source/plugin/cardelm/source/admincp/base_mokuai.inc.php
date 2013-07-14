@@ -18,6 +18,13 @@ $subac = in_array($subac,$subacs) ? $subac : $subacs[0];
 $mokuaiid = getgpc('mokuaiid');
 $mokuai_info = $mokuaiid ? DB::fetch_first("SELECT * FROM ".DB::table('cardelm_mokuai')." WHERE mokuaiid=".$mokuaiid) : array();
 
+//服务器端的模块数据
+$indata = array();
+$server_mokuais = api_indata('getmokuailist',$indata);
+
+dump($server_mokuais);
+
+
 if($subac == 'mokuailist') {
 	if(!submitcheck('submit')) {
 		showtips(lang('plugin/cardelm','mokuai_list_tips'));
