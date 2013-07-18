@@ -34,13 +34,13 @@ if($subac == 'mokuailist') {
 		while($row = DB::fetch($query)) {
 			showtablerow('', array('style="width:45px"', 'valign="top" style="width:260px"', 'valign="top"', 'align="right" valign="bottom" style="width:160px"'), array(
 				'<img src="'.cloudaddons_pluginlogo_url($entry).'" onerror="this.src=\'static/image/admincp/plugin_logo.png\';this.onerror=null" width="40" height="40" align="left" style="margin-right:5px" />',
-				'<span class="bold">'.$row['mokuaititle'].$row['mokuaiver'].($filemtime > TIMESTAMP - 86400 ? ' <font color="red">New!</font>' : '').'</span>  <span class="sml">('.$row['mokuainame'].')</span>',
+				'<span class="bold">'.$row['name'].$row['version'].($filemtime > TIMESTAMP - 86400 ? ' <font color="red">New!</font>' : '').'</span>  <span class="sml">('.$row['identifier'].')</span>',
 				$row['description'],
 				"<a href=\"".ADMINSCRIPT."?action=".$this_page."&subac=mokuaiedit&mokuaiid=$row[mokuaiid]\" class=\"bold\" >".$lang['plugins_config_install']."</a>&nbsp;&nbsp;<a href=\"".ADMINSCRIPT."?action=".$this_page."&subac=mokuaiedit&mokuaiid=$row[mokuaiid]\" >".$lang['plugins_config_uninstall']."</a>&nbsp;&nbsp;",
 			));
 //			showtablerow('class="hover"', array('style="width:45px"', 'valign="top"', 'align="right" valign="bottom" style="width:160px"'), array(
 //				'<img src="'.cloudaddons_pluginlogo_url($entry).'" onerror="this.src=\'static/image/admincp/plugin_logo.png\';this.onerror=null" width="40" height="40" align="left" style="margin-right:5px" />',
-//				'<span class="bold light">'.$row['mokuaititle'].'('.$row['mokuainame'].')'.$row['mokuaiver'].($filemtime > TIMESTAMP - 86400 ? ' <font color="red">New!</font>' : '').'</span>',
+//				'<span class="bold light">'.$row['name'].'('.$row['identifier'].')'.$row['version'].($filemtime > TIMESTAMP - 86400 ? ' <font color="red">New!</font>' : '').'</span>',
 //				"<a href=\"".ADMINSCRIPT."?action=".$this_page."&subac=mokuaiedit&mokuaiid=$row[mokuaiid]\" class=\"bold\" >".$lang['plugins_config_install']."</a>&nbsp;&nbsp;<a href=\"".ADMINSCRIPT."?action=".$this_page."&subac=mokuaiedit&mokuaiid=$row[mokuaiid]\" >".$lang['plugins_config_uninstall']."</a>&nbsp;&nbsp;",
 //			));
 		}
