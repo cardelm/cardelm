@@ -22,7 +22,7 @@ $mokuai_info = $mokuaiid ? DB::fetch_first("SELECT * FROM ".DB::table('cardelm_m
 $indata = array();
 $server_mokuais = api_indata('getmokuailist',$indata);
 
-dump($server_mokuais);
+//dump($server_mokuais);
 
 
 if($subac == 'mokuailist') {
