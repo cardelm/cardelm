@@ -91,6 +91,79 @@ function api_indata($apiaction,$indata=array()){
 	//}
 }//end func
 
+//站长安装，此函数必须要修改
+function site_install(){
+	global $_G;
+	require_once DISCUZ_ROOT.'/source/discuz_version.php';
+	$installdata['siteurl'] = $_G['siteurl'];
+	$installdata['sitegroupid'] = 1;
+	$installdata['charset'] = $_G['charset'];
+	$installdata['clientip'] = $_G['clientip'];
+	$installdata['version'] = DISCUZ_VERSION.'-'.DISCUZ_RELEASE.'-'.DISCUZ_FIXBUG;
+	if(DB::result_first("SELECT count(*) FROM ".DB::table('cardelm_server_site')." WHERE siteurl='".$_G['siteurl']."'")==0){
+		$installdata['salt'] = random(6);
+		$installdata['sitekey'] = md5(md5($_G['siteurl']).$installdata['salt']);
+		$installdata['installtime'] = time();
+		DB::insert('cardelm_server_site', $installdata);
+	}else{
+		$installdata['updatetime'] = time();
+		DB::update('cardelm_server_site', $installdata,array('siteurl'=>$_G['siteurl']));
+	}
+
+}//end func
+
+//生成pageid数据
+function make_pageid($mokuai,$pagetype,$submod){
+	$sitekey = DB::result_first("SELECT svalue FROM ".DB::table('common_setting')." WHERE skey='sitekey'");
+	if(DB::result_first("SELECT count(*) FROM ".DB::table('cardelm_page')." WHERE mokuai='".$mokuai."' AND pagetype = '".$pagetype."' AND submod = '".$submod."'")==0){
+		$indata['mokuai'] = $mokuai;
+		$indata['pagetype'] = $pagetype;
+		$indata['submod'] = $submod;
+		$indata['pageid'] = md5($mokuai.$pagetype.$submod.$sitekey);
+		DB::insert('cardelm_page', $indata);
+	}
+	return DB::result_first("SELECT pageid FROM ".DB::table('cardelm_page')." WHERE mokuai='".$mokuai."' AND pagetype = '".$pagetype."' AND submod = '".$submod."'");
+}
+//生成页面类型pageid数据
+function make_pagetype_pageid($pagetype){
+	$sitekey = DB::result_first("SELECT svalue FROM ".DB::table('common_setting')." WHERE skey='sitekey'");
+	if(DB::result_first("SELECT count(*) FROM ".DB::table('common_setting')." WHERE skey='pagetype_".$pagetype."'")==0){
+		DB::insert('common_setting', array('skey'=>'pagetype_'.$pagetype,'svalue'=>random(1).md5($pagetype.$sitekey)));
+	}
+	$pageid = DB::result_first("SELECT svalue FROM ".DB::table('common_setting')." WHERE skey='pagetype_".$pagetype."'");
+	$pagetype_file = CARDELM_ROOT.$pageid.'.inc.php';
+	if(!file_exists($pagetype_file)){
+		file_put_contents($pagetype_file,"<?php\n\n?>");
+	}
+	return $pagetype_file;
+}
+//创建后台管理的页面
+function make_admincp_page(){
+	$admincp_page = CARDELM_ROOT.DB::result_first("SELECT svalue FROM ".DB::table('common_setting')." WHERE skey='pagetype_admincp'").'.inc.php';
+	$function_name = DB::result_first("SELECT svalue FROM ".DB::table('common_setting')." WHERE skey='pagetype_function'");
+	$admincp_file_text = file_get_contents(CARDELM_ROOT.'admincp.inc.php');
+	$admincp_file_text = str_replace("/source/plugin/cardelm/source/function.php","/source/plugin/cardelm/".$function_name.".inc.php",$admincp_file_text);
+	file_put_contents($admincp_page,$admincp_file_text);
+	//return $function_name;
+}
+
+
+//
+function cardelm_page($mokuai,$pagetype,$submod){
+	$cardelm_page = DB::result_first("SELECT pageid FROM ".DB::table('cardelm_page')." WHERE mokuai='".$mokuai."' AND pagetype = '".$pagetype."' AND submod = '".$submod."'");
+	if(DB::result_first("SELECT count(*) FROM ".DB::table('cardelm_page')." WHERE mokuai='".$mokuai."' AND pagetype = '".$pagetype."' AND submod = '".$submod."'")==0){
+
+	}
+	if($pagetype == 'admincp'){
+		$cardelm_page = 'plugins&identifier=cardelm&pmod=admincp&submod='.$mokuai.'_'.$submod;
+	}elseif ($pagetype == 'cardelm'){
+		$cardelm_page = 'plugins&identifier=cardelm&pmod=admincp&submod='.$submod;
+	}elseif ($pagetype == 'member'){
+		$cardelm_page = 'plugins&identifier=cardelm&pmod=admincp&submod='.$submod;
+	}
+	return $cardelm_page;
+}//end func
+
 //更新前台导航菜单
 function cardelm_upnav(){
 	$query = DB::query("SELECT * FROM ".DB::table('cardelm_mokuai')." WHERE available = 1 order by mokuaiid asc");
@@ -243,7 +316,7 @@ function make_admincp_file($submod_file){
 function copy_plugin_file($submod_file){
 	global $submod,$current_group;
 	$plugin_file = substr(CARDELM_ROOT,0,strlen(CARDELM_ROOT)-8).'yiqixueba_'.$current_group.'/'.str_replace($current_group."_","",$submod).'.inc.php';
-	//dump($plugin_file);
+	dump($plugin_file);
 	if(file_exists($plugin_file)){
 		file_put_contents($submod_file,file_get_contents($plugin_file));
 	}else{
