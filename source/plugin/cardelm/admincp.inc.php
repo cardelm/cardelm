@@ -51,21 +51,32 @@ while($row = DB::fetch($query)) {
 			}
 		}
 	}
-	$admin_menu[] = array(array('menu'=>$current_menu ? $current_menu : $row['name'],'submenu'=>$submenu),$current_menu );
+	$admin_menu[] = array(array('menu'=>$current_menu ? $current_menu : $row['name'],'submenu'=>$submenu),$current_menu);
 }
 
 $pageid = make_pageid($current_group,'admincp',str_replace($current_group."_","",$submod));
-dump(make_pagetype_pageid('function'));
+make_pagetype_pageid('admin');
 
 echo '<style>.floattopempty { height: 15px !important; height: auto; } </style>';
-showsubmenu($plugin['name'].' '.$plugin['version'],$admin_menu);
+showsubmenu($plugin['name'].' '.$plugin['version'],$admin_menu,'<a href="'.ADMINSCRIPT.'?action=plugins&operation=upgradecheck" class="bold" style="float:right;padding-right:40px;">'.$lang['plugins_validator'].'</a>');
+
+
+//$this_page = substr($_SERVER['QUERY_STRING'],7,strlen($_SERVER['QUERY_STRING'])-7);
+//stripos($this_page,'subac=') ? $this_page = substr($this_page,0,stripos($this_page,'subac=')-1) : $this_page;
+
+
+
+
+
+
+
 
 $query = DB::query("SELECT * FROM ".DB::table('common_setting')." WHERE skey like 'pagetype_%'");
 while($row = DB::fetch($query)) {
-	echo $row['skey'].'='.$row['svalue'].'<br />';
+	//echo $row['skey'].'='.$row['svalue'].'<br />';
 }
 
-dump(make_admincp_page());
+make_admincp_page();
 
 cardelm_upnav();//更新前台的导航菜单，在模块安装使用，先暂时放在这里
 

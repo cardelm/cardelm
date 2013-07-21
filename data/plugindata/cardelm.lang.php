@@ -21,9 +21,9 @@ $scriptlang['cardelm'] = array(
 	'' => '',
 	//模块管理
 	'mokuai_list_tips' => '模块列表',
-	'mokuai_list' => '模块列表',
-	'' => '',
-	'' => '',
+	'mokuai_zhuanhuanen_list' => '已转换模块',
+	'mokuai_nozhuanhuan_list' => '未转换模块',
+	'zhuanhuan' => '转换',
 	'' => '',
 	'' => '',
 	'' => '',

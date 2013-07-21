@@ -316,7 +316,7 @@ function make_admincp_file($submod_file){
 function copy_plugin_file($submod_file){
 	global $submod,$current_group;
 	$plugin_file = substr(CARDELM_ROOT,0,strlen(CARDELM_ROOT)-8).'yiqixueba_'.$current_group.'/'.str_replace($current_group."_","",$submod).'.inc.php';
-	dump($plugin_file);
+	//dump($plugin_file);
 	if(file_exists($plugin_file)){
 		file_put_contents($submod_file,file_get_contents($plugin_file));
 	}else{

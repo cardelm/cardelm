@@ -11,7 +11,6 @@ $mokuai = getgpc('mokuai');
 
 $submod_file = CARDELM_ROOT.'mokuai/'.$mokuai.'/cardelm/'.$submod.'.inc.php';
 
-dump(file_exists($submod_file));
 
 if (file_exists($submod_file)){
 	require_once $submod_file;
