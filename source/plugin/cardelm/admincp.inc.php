@@ -6,7 +6,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 }
 
 
-require_once DISCUZ_ROOT.'/source/plugin/cardelm/source/function.php';
+require_once DISCUZ_ROOT.'/source/plugin/cardelm/function.php';
 
 
 
