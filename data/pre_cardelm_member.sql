@@ -284,14 +284,13 @@ INSERT INTO `pre_cardelmserver_site` VALUES ('1', '0', 'http://localhost/demo/dz
 -- ----------------------------
 -- Table structure for `pre_cardelmserver_sitegroup`
 -- ----------------------------
-DROP TABLE IF EXISTS `pre_cardelmserver_sitegroup`;
-CREATE TABLE `pre_cardelmserver_sitegroup` (
+DROP TABLE IF EXISTS `pre_yiqixueba_server_sitegroup`;
+CREATE TABLE `pre_yiqixueba_server_sitegroup` (
   `sitegroupid` smallint(3) unsigned NOT NULL auto_increment,
   `sitegroupname` char(20) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `mokuaitest` varchar(255) NOT NULL,
   PRIMARY KEY  (`sitegroupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM;
 
 -- ----------------------------
 -- Records of pre_cardelmserver_sitegroup
